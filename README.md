@@ -90,4 +90,4 @@ decoder 解码器选择nec
 ### 联系方式 & 感谢
 
 - 维护：jsrdczy
-- 主页：https://github.com/RT-Thread-packages/infrared_framework
+- 主页：https://github.com/jsrdczy/rt_thread_multi_infrared_frame.git
