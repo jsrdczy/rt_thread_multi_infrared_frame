@@ -6,6 +6,7 @@
  * Change Logs:
  * Date           Author       Notes
  * 2019-03-25     balanceTWK   the first version
+ * 2022-02-28     jsrdczy      improve multi receive
  */
  
 #ifndef __INFRARED__

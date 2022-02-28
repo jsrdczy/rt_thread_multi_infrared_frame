@@ -6,6 +6,7 @@
  * Change Logs:
  * Date           Author            Notes
  * 2018-08-26     balanceTWK        the first version
+ * 2022-02-28     jsrdczy           improve multi receive
  */
 
 #ifndef __DECODER_H__
