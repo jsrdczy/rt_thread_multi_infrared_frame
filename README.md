@@ -42,8 +42,9 @@ RT-Thread online packages
 		 (4)       multi infrared receive channel nums                  
 			   Version (latest)  --->
 ```
-
+其中 multi infrared receive channel nums 代表通道总个数，默认4个，用户自行修改
 decoder 解码器选择nec
+
 ```c
 [*] enable nec decoder
 ```
