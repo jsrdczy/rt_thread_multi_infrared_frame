@@ -104,10 +104,10 @@ static void receive_pin3_callback(void* param)
             receive_time.usec = RECEIVE_HWTIMEER_USEC;
             rt_device_write(receive_time_dev, 0, &receive_time, sizeof(receive_time));
         }
-            receive_flag |= 1 << 2;
-            /*init decoder time and stat*/
-            infrared[2]->decode_time = 0;
-            infrared[2]->decoder.ops->init((struct decoder_class *)&infrared[2]->decoder);
+        receive_flag |= 1 << 2;
+        /*init decoder time and stat*/
+        infrared[2]->decode_time = 0;
+        infrared[2]->decoder.ops->init((struct decoder_class *)&infrared[2]->decoder);
     }			
 }
 

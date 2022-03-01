@@ -146,7 +146,7 @@ static rt_err_t nec_decoder_decode(struct decoder_class *decoder,rt_uint32_t dec
             }
         }
         break;
-		default:
+        default:
         break;
     }			
     return RT_EOK;
