@@ -82,72 +82,72 @@ static rt_err_t nec_decoder_control(struct decoder_class *decoder,int cmd, void 
 /*nec_decoder*/
 static rt_err_t nec_decoder_decode(struct decoder_class *decoder,rt_uint32_t decode_time)
 {
-	  struct infrared_class *infrared = decoder->user_data;
+    struct infrared_class *infrared = decoder->user_data;
 
     switch(decoder->nec_state)
     {
-				case START_STA: /* judge lead code or repeat code */
-				{
+	    case START_STA: /* judge lead code or repeat code */
+	    {
 					  /*is lead code*/ 
-				    if(decode_time >= IR_DECODER_LEAD_TIMER_MIN && decode_time <= IR_DECODER_LEAD_TIMER_MAX)
+		    if(decode_time >= IR_DECODER_LEAD_TIMER_MIN && decode_time <= IR_DECODER_LEAD_TIMER_MAX)
             {
-								decoder->nec_state = LEAD_CODE_STA;
-							  decoder->decode_cnt = 0;
-							  decoder->nec_data.repeat = 0;
-							  decoder->decode_size = 4;
-							  decoder->decode_size_curr = 0;
-						}/*is repeat code*/ 
-				    else if(decode_time >= IR_DECODER_REPEAT_TIMER_MIN && decode_time <= IR_DECODER_REPEAT_TIMER_MAX)
-						{
-								decoder->nec_state = START_STA; /*return to sta and repeat ++*/
-							  decoder->nec_data.repeat++;
-							  rt_ringbuffer_put(decoder->ringbuff, (rt_uint8_t *)&(decoder->nec_data), sizeof(struct nec_data_struct));
-						}
-						else
-						{
-								decoder->nec_state = START_STA;
-						}
-						infrared->decode_time = 0;  /*clear decode time for next decode */
-				}
-				break;
-				case LEAD_CODE_STA:
+                decoder->nec_state = LEAD_CODE_STA;
+                decoder->decode_cnt = 0;
+                decoder->nec_data.repeat = 0;
+                decoder->decode_size = 4;
+                decoder->decode_size_curr = 0;
+            }/*is repeat code*/ 
+            else if(decode_time >= IR_DECODER_REPEAT_TIMER_MIN && decode_time <= IR_DECODER_REPEAT_TIMER_MAX)
+			{
+				decoder->nec_state = START_STA; /*return to sta and repeat ++*/
+				decoder->nec_data.repeat++;
+				rt_ringbuffer_put(decoder->ringbuff, (rt_uint8_t *)&(decoder->nec_data), sizeof(struct nec_data_struct));
+			}
+			else
+			{
+				decoder->nec_state = START_STA;
+			}
+			infrared->decode_time = 0;  /*clear decode time for next decode */
+			}
+			break;
+			case LEAD_CODE_STA:
+			{
+				if(decode_time >= IR_DECODER_HIGH_TIMER_MIN && decode_time <= IR_DECODER_HIGH_TIMER_MAX) /* bit 1 */
 				{
-						if(decode_time >= IR_DECODER_HIGH_TIMER_MIN && decode_time <= IR_DECODER_HIGH_TIMER_MAX) /* bit 1 */
-						{
-							  *(rt_uint8_t *)((rt_uint8_t *)&decoder->nec_data + decoder->decode_size_curr) >>= 1;
-							  *(rt_uint8_t *)((rt_uint8_t *)&decoder->nec_data + decoder->decode_size_curr) |= 0x80;
-							  decoder->decode_cnt++;
-						}
-						else if(decode_time >= IR_DECODER_LOW_TIMER_MIN && decode_time <= IR_DECODER_LOW_TIMER_MAX) /*bit 0*/
-						{
-							  *(rt_uint8_t *)((rt_uint8_t *)&decoder->nec_data + decoder->decode_size_curr) >>= 1;
-							  *(rt_uint8_t *)((rt_uint8_t *)&decoder->nec_data + decoder->decode_size_curr) |= 0x00;
-							  decoder->decode_cnt++;
-						}
-						else /* time no match ,init receive*/
-						{
-						    decoder->decode_cnt = 0;
-						    decoder->nec_state = START_STA;
-							  decoder->decode_size_curr = 0;
-							  decoder->decode_size = 0;
-						}
-						infrared->decode_time = 0;  /*clear decode time for next decode*/
-						if(decoder->decode_cnt >= 8) /* bit num 8 reach*/ 
-						{
-							  decoder->decode_cnt = 0;
-							  ++decoder->decode_size_curr;
-							  if(decoder->decode_size_curr >= decoder->decode_size)
-								{
-										decoder->nec_state = START_STA;
-										decoder->decode_size_curr = 0;
-										decoder->decode_size = 0;
-							      rt_ringbuffer_put(decoder->ringbuff, (rt_uint8_t *)&(decoder->nec_data), sizeof(struct nec_data_struct));
-								}
-						}
+					*(rt_uint8_t *)((rt_uint8_t *)&decoder->nec_data + decoder->decode_size_curr) >>= 1;
+					*(rt_uint8_t *)((rt_uint8_t *)&decoder->nec_data + decoder->decode_size_curr) |= 0x80;
+					decoder->decode_cnt++;
 				}
-				break;
-				default:
-				break;
+				else if(decode_time >= IR_DECODER_LOW_TIMER_MIN && decode_time <= IR_DECODER_LOW_TIMER_MAX) /*bit 0*/
+				{
+					*(rt_uint8_t *)((rt_uint8_t *)&decoder->nec_data + decoder->decode_size_curr) >>= 1;
+					*(rt_uint8_t *)((rt_uint8_t *)&decoder->nec_data + decoder->decode_size_curr) |= 0x00;
+					decoder->decode_cnt++;
+			    }
+				else /* time no match ,init receive*/
+				{
+					decoder->decode_cnt = 0;
+					decoder->nec_state = START_STA;
+					decoder->decode_size_curr = 0;
+					decoder->decode_size = 0;
+				}
+				infrared->decode_time = 0;  /*clear decode time for next decode*/
+				if(decoder->decode_cnt >= 8) /* bit num 8 reach*/ 
+				{
+					decoder->decode_cnt = 0;
+					++decoder->decode_size_curr;
+					if(decoder->decode_size_curr >= decoder->decode_size)
+					{
+						decoder->nec_state = START_STA;
+						decoder->decode_size_curr = 0;
+						decoder->decode_size = 0;
+						rt_ringbuffer_put(decoder->ringbuff, (rt_uint8_t *)&(decoder->nec_data), sizeof(struct nec_data_struct));
+					}
+				}
+		    }
+			break;
+			default:
+			break;
 		}			
 	
     return RT_EOK;
