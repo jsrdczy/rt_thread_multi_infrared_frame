@@ -88,7 +88,7 @@ static rt_err_t nec_decoder_decode(struct decoder_class *decoder,rt_uint32_t dec
     {
         case START_STA: /* judge lead code or repeat code */
         {
-					  /*is lead code*/ 
+            /*is lead code*/ 
             if(decode_time >= IR_DECODER_LEAD_TIMER_MIN && decode_time <= IR_DECODER_LEAD_TIMER_MAX)
             {
                 decoder->nec_state = LEAD_CODE_STA;
@@ -102,11 +102,11 @@ static rt_err_t nec_decoder_decode(struct decoder_class *decoder,rt_uint32_t dec
                 decoder->nec_state = START_STA; /*return to sta and repeat ++*/
                 decoder->nec_data.repeat++;
                 rt_ringbuffer_put(decoder->ringbuff, (rt_uint8_t *)&(decoder->nec_data), sizeof(struct nec_data_struct));
-			}
-			else
-			{
+            }
+            else
+            {
                 decoder->nec_state = START_STA;
-			}
+            }
             infrared->decode_time = 0;  /*clear decode time for next decode */
         }
         break;
