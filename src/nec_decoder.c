@@ -162,7 +162,7 @@ static struct decoder_ops ops;
 
 int nec_decoder_register()
 {
-	  struct infrared_class *infrared;
+    struct infrared_class *infrared;
 	  
     ops.control = nec_decoder_control;
     ops.decode = nec_decoder_decode;
@@ -171,15 +171,14 @@ int nec_decoder_register()
     ops.read = nec_decoder_read;
     ops.write = nec_decoder_write;	
 	  
-	  for(rt_uint8_t i = 0;i < MULTI_INFRARED_RECEIVE_CHANNEL_NUM;i++)
-	  {
-				infrared = infrared_find(i);
-				infrared->decoder.name = "nec";
-				infrared->decoder.ops = &ops;
-				infrared->decoder.user_data = infrared;
-		}
-		
-		return 0;
+    for(rt_uint8_t i = 0;i < MULTI_INFRARED_RECEIVE_CHANNEL_NUM;i++)
+    {
+        infrared = infrared_find(i);
+        infrared->decoder.name = "nec";
+        infrared->decoder.ops = &ops;
+        infrared->decoder.user_data = infrared;
+    }
+    return 0;
 }
 INIT_PREV_EXPORT(nec_decoder_register);
 #endif /* INFRARED_NEC_DECODER */
