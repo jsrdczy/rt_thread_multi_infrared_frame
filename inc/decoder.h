@@ -15,12 +15,12 @@
 
 typedef enum
 {
-		START_STA = 0,             
-		LEAD_CODE_STA,              
-		CUSTOM_CODE1_STA,            
-		CUSTOM_CODE2_STA,            
-		DATA_CODE1_STA,              
-		DATA_CODE2_STA,
+    START_STA = 0,             
+    LEAD_CODE_STA,              
+    CUSTOM_CODE1_STA,            
+    CUSTOM_CODE2_STA,            
+    DATA_CODE1_STA,              
+    DATA_CODE2_STA,
     REPEAT_STA,	
 }nec_sta_enum;
 

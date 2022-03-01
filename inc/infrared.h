@@ -29,14 +29,14 @@ struct decoder_class
     char* name;
     struct decoder_ops* ops;
 	
-	  /*nec decoder status*/
+    /*nec decoder status*/
     nec_sta_enum nec_state;
-	  rt_uint8_t decode_cnt;  //bit num in one byte
-	  rt_uint8_t decode_size; //bytes bum in one frame
-	  rt_uint8_t decode_size_curr; // current recv bytes num in one frame
-	  struct nec_data_struct nec_data;
+    rt_uint8_t decode_cnt;  //bit num in one byte
+    rt_uint8_t decode_size; //bytes bum in one frame
+    rt_uint8_t decode_size_curr; // current recv bytes num in one frame
+    struct nec_data_struct nec_data;
 	
-	  struct rt_ringbuffer *ringbuff;
+    struct rt_ringbuffer *ringbuff;
     void* user_data;
 };
 
@@ -52,8 +52,8 @@ struct decoder_ops
 
 struct infrared_class
 {
-	  struct decoder_class decoder; //decoder class
-	  volatile rt_uint32_t decode_time;  /*one carrier wave and one idle time total*/
+    struct decoder_class decoder; //decoder class
+    volatile rt_uint32_t decode_time;  /*one carrier wave and one idle time total*/
     rt_size_t (*send)(struct ir_raw_data* data, rt_size_t size);
 };
 

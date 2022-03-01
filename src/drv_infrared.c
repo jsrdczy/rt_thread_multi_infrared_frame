@@ -41,126 +41,124 @@ volatile static rt_uint32_t receive_flag = 0x00000000; /* whether infrared chann
 static void receive_pin1_callback(void* param)
 {
     rt_hwtimerval_t receive_time;
-		/*judeg infrared channel is recving*/
-	  if(receive_flag & (1 << 0))
+    /*judeg infrared channel is recving*/
+    if(receive_flag & (1 << 0))
     {
-				infrared[0]->decoder.ops->decode((struct decoder_class *)&infrared[0]->decoder,infrared[0]->decode_time);
-
-		}
+        infrared[0]->decoder.ops->decode((struct decoder_class *)&infrared[0]->decoder,infrared[0]->decode_time);
+    }
     else /*start timer*/
-		{
-				if(!receive_flag)
-				{
+    {
+        if(!receive_flag)
+        {
             receive_flag |= 1 << 0;
-						receive_time.sec = RECEIVE_HWTIMEER_SEC;
-						receive_time.usec = RECEIVE_HWTIMEER_USEC;
-						rt_device_write(receive_time_dev, 0, &receive_time, sizeof(receive_time));
-				}
+            receive_time.sec = RECEIVE_HWTIMEER_SEC;
+            receive_time.usec = RECEIVE_HWTIMEER_USEC;
+            rt_device_write(receive_time_dev, 0, &receive_time, sizeof(receive_time));
+        }
         receive_flag |= 1 << 0;
-				/*init decoder time and stat*/
-				infrared[0]->decode_time = 0;
-				infrared[0]->decoder.ops->init((struct decoder_class *)&infrared[0]->decoder);
-		}
+        /*init decoder time and stat*/
+        infrared[0]->decode_time = 0;
+        infrared[0]->decoder.ops->init((struct decoder_class *)&infrared[0]->decoder);
+    }
 }
 
 
 static void receive_pin2_callback(void* param)
 {		
     rt_hwtimerval_t receive_time;
-		/*judeg infrared channel is recving*/
-	  if(receive_flag & (1 << 1))
+    /*judeg infrared channel is recving*/
+    if(receive_flag & (1 << 1))
     {
-				infrared[1]->decoder.ops->decode((struct decoder_class *)&infrared[1]->decoder,infrared[1]->decode_time);
-		}
+        infrared[1]->decoder.ops->decode((struct decoder_class *)&infrared[1]->decoder,infrared[1]->decode_time);
+    }
     else /*start timer*/
-		{
-				if(!receive_flag)
-				{
+    {
+        if(!receive_flag)
+        {
             receive_flag |= 1 << 1;
-						receive_time.sec = RECEIVE_HWTIMEER_SEC;
-						receive_time.usec = RECEIVE_HWTIMEER_USEC;
-						rt_device_write(receive_time_dev, 0, &receive_time, sizeof(receive_time));
-				}
+            receive_time.sec = RECEIVE_HWTIMEER_SEC;
+            receive_time.usec = RECEIVE_HWTIMEER_USEC;
+            rt_device_write(receive_time_dev, 0, &receive_time, sizeof(receive_time));
+        }
         receive_flag |= 1 << 1;
-				/*init decoder time and stat*/
-				infrared[1]->decode_time = 0;
-				infrared[1]->decoder.ops->init((struct decoder_class *)&infrared[1]->decoder);
-		}			
+        /*init decoder time and stat*/
+        infrared[1]->decode_time = 0;
+        infrared[1]->decoder.ops->init((struct decoder_class *)&infrared[1]->decoder);
+    }			
 }
 
 static void receive_pin3_callback(void* param)
 {
     rt_hwtimerval_t receive_time;
-		/*judeg infrared channel is recving*/
-	  if(receive_flag & (1 << 2))
+    /*judeg infrared channel is recving*/
+    if(receive_flag & (1 << 2))
     {
-				infrared[2]->decoder.ops->decode((struct decoder_class *)&infrared[2]->decoder,infrared[2]->decode_time);
-		}
+        infrared[2]->decoder.ops->decode((struct decoder_class *)&infrared[2]->decoder,infrared[2]->decode_time);
+    }
     else /*start timer*/
-		{
-				if(!receive_flag)
-				{
+    {
+        if(!receive_flag)
+        {
             receive_flag |= 1 << 2;
-						receive_time.sec = RECEIVE_HWTIMEER_SEC;
-						receive_time.usec = RECEIVE_HWTIMEER_USEC;
-						rt_device_write(receive_time_dev, 0, &receive_time, sizeof(receive_time));
-				}
-        receive_flag |= 1 << 2;
-				/*init decoder time and stat*/
-				infrared[2]->decode_time = 0;
-				infrared[2]->decoder.ops->init((struct decoder_class *)&infrared[2]->decoder);
-		}			
+            receive_time.sec = RECEIVE_HWTIMEER_SEC;
+            receive_time.usec = RECEIVE_HWTIMEER_USEC;
+            rt_device_write(receive_time_dev, 0, &receive_time, sizeof(receive_time));
+        }
+            receive_flag |= 1 << 2;
+            /*init decoder time and stat*/
+            infrared[2]->decode_time = 0;
+            infrared[2]->decoder.ops->init((struct decoder_class *)&infrared[2]->decoder);
+    }			
 }
 
 static void receive_pin4_callback(void* param)
 {
     rt_hwtimerval_t receive_time;
-		/*judeg infrared channel is recving*/
-	  if(receive_flag & (1 << 3))
+    /*judeg infrared channel is recving*/
+    if(receive_flag & (1 << 3))
     {
-				infrared[3]->decoder.ops->decode((struct decoder_class *)&infrared[3]->decoder,infrared[3]->decode_time);
-		}
+        infrared[3]->decoder.ops->decode((struct decoder_class *)&infrared[3]->decoder,infrared[3]->decode_time);
+    }
     else /*start timer*/
-		{
-				if(!receive_flag)
-				{
+    {
+        if(!receive_flag)
+        {
             receive_flag |= 1 << 3;
-						receive_time.sec = RECEIVE_HWTIMEER_SEC;
-						receive_time.usec = RECEIVE_HWTIMEER_USEC;
-						rt_device_write(receive_time_dev, 0, &receive_time, sizeof(receive_time));
-				}
+            receive_time.sec = RECEIVE_HWTIMEER_SEC;
+            receive_time.usec = RECEIVE_HWTIMEER_USEC;
+            rt_device_write(receive_time_dev, 0, &receive_time, sizeof(receive_time));
+        }
         receive_flag |= 1 << 3;
-				/*init decoder time and stat*/
-				infrared[3]->decode_time = 0;
-				infrared[3]->decoder.ops->init((struct decoder_class *)&infrared[3]->decoder);
-		}			
+        /*init decoder time and stat*/
+        infrared[3]->decode_time = 0;
+        infrared[3]->decoder.ops->init((struct decoder_class *)&infrared[3]->decoder);
+    }			
 }
 
 static rt_err_t receive_timeout_callback(rt_device_t dev, rt_size_t size)
 {
-	  struct infrared_class *infrared;
-	  /*check if infrared recv time out*/
-	  for(rt_uint8_t i = 0; i < MULTI_INFRARED_RECEIVE_CHANNEL_NUM; i++)
+    struct infrared_class *infrared;
+    /*check if infrared recv time out*/
+    for(rt_uint8_t i = 0; i < MULTI_INFRARED_RECEIVE_CHANNEL_NUM; i++)
     {
-		    if(receive_flag & (rt_uint32_t)(0x00000001 << i)) /*jugde that infrared channel is receiving*/
-				{
-						infrared = infrared_find(i);
-					  /*one bit decode time count and time out*/ 
-					  ++infrared->decode_time;
-					  if(infrared->decode_time > INFRARED_ONETBIT_TIMEOUT)
-						{
-							  infrared->decode_time = 0;
-				        infrared->decoder.ops->init((struct decoder_class *)&infrared->decoder);
-						    receive_flag &= ~(rt_uint32_t)(0x00000001 << i); /*clear receive flag*/
-						}
-				}
-		}  
-	  /*no infrared channel recving then stop channel */
-		if(!receive_flag)
-		{
+        if(receive_flag & (rt_uint32_t)(0x00000001 << i)) /*jugde that infrared channel is receiving*/
+        {
+            infrared = infrared_find(i);
+            /*one bit decode time count and time out*/ 
+            ++infrared->decode_time;
+            if(infrared->decode_time > INFRARED_ONETBIT_TIMEOUT)
+            {
+                infrared->decode_time = 0;
+                infrared->decoder.ops->init((struct decoder_class *)&infrared->decoder);
+                receive_flag &= ~(rt_uint32_t)(0x00000001 << i); /*clear receive flag*/
+            }
+        }
+    }  
+    /*no infrared channel recving then stop channel */
+    if(!receive_flag)
+    {
         rt_device_control(receive_time_dev, HWTIMER_CTRL_STOP, RT_NULL);
-		}
-		
+    }	
     return 0;
 }
 
@@ -175,12 +173,12 @@ rt_err_t infrared_receive_init(void)
     rt_hwtimer_mode_t mode;
     rt_uint32_t freq = 1000000; /*1us 1Mhz*/
     /*pin init*/
-	  for(uint8_t i = 0;i < MULTI_INFRARED_RECEIVE_CHANNEL_NUM;i++)
-	  {
-				rt_pin_mode(receive_pin[i],PIN_MODE_INPUT_PULLUP);
+    for(uint8_t i = 0;i < MULTI_INFRARED_RECEIVE_CHANNEL_NUM;i++)
+    {
+        rt_pin_mode(receive_pin[i],PIN_MODE_INPUT_PULLUP);
         rt_pin_attach_irq(receive_pin[i],PIN_IRQ_MODE_FALLING,pin_hdr[i],RT_NULL);
         rt_pin_irq_enable(receive_pin[i],PIN_IRQ_ENABLE);
-		}
+    }
 		
     receive_time_dev = rt_device_find(RECEIVE_HWTIMER);
     if (receive_time_dev == RT_NULL)
@@ -216,17 +214,16 @@ rt_err_t infrared_receive_init(void)
 
 int drv_infrared_init()
 {
-	  rt_err_t res = RT_EOK;
+    rt_err_t res = RT_EOK;
 		
-	  for(uint8_t i = 0;i < MULTI_INFRARED_RECEIVE_CHANNEL_NUM;i++)
-	  {
-				infrared[i] = infrared_find(i);
-			  res = infrared_init(infrared[i]);
-		} 	
-		
+    for(uint8_t i = 0;i < MULTI_INFRARED_RECEIVE_CHANNEL_NUM;i++)
+    {
+        infrared[i] = infrared_find(i);
+        res = infrared_init(infrared[i]);
+    } 		
     if(res < 0)
     {
-			  rt_kprintf("multi infrared init fail!\r\n");
+        rt_kprintf("multi infrared init fail!\r\n");
         return -1;
     }
 

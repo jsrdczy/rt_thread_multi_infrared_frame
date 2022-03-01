@@ -35,17 +35,17 @@
 static rt_err_t nec_decoder_init(struct decoder_class *decoder)
 {
     RT_ASSERT(decoder != RT_NULL);
-	  if(!decoder->ringbuff)
-		{
-				decoder->ringbuff = rt_ringbuffer_create(sizeof(struct nec_data_struct) * NEC_BUFF_SIZE);
-		}
+    if(!decoder->ringbuff)
+    {
+        decoder->ringbuff = rt_ringbuffer_create(sizeof(struct nec_data_struct) * NEC_BUFF_SIZE);
+    }
 	
-	  decoder->decode_cnt = 0;
-		decoder->decode_size = 0;
-		decoder->decode_size_curr = 0;
-	  decoder->nec_state = START_STA;
-	  rt_memset(&decoder->nec_data,0,sizeof(struct nec_data_struct)); /*clear nec status and data*/
-	  return RT_EOK;
+    decoder->decode_cnt = 0;
+    decoder->decode_size = 0;
+    decoder->decode_size_curr = 0;
+    decoder->nec_state = START_STA;
+    rt_memset(&decoder->nec_data,0,sizeof(struct nec_data_struct)); /*clear nec status and data*/
+    return RT_EOK;
 }
 /*free decoder*/
 static rt_err_t nec_decoder_deinit(struct decoder_class *decoder)
@@ -53,11 +53,11 @@ static rt_err_t nec_decoder_deinit(struct decoder_class *decoder)
     RT_ASSERT(decoder != RT_NULL);
 	
     rt_ringbuffer_destroy(decoder->ringbuff);
-	  decoder->decode_cnt = 0;
-	  decoder->decode_size = 0;
-	  decoder->decode_size_curr = 0;
-	  decoder->nec_state = START_STA;
-	  rt_memset(&decoder->nec_data,0,sizeof(struct nec_data_struct)); /*clear nec status and data*/
+    decoder->decode_cnt = 0;
+    decoder->decode_size = 0;
+    decoder->decode_size_curr = 0;
+    decoder->nec_state = START_STA;
+    rt_memset(&decoder->nec_data,0,sizeof(struct nec_data_struct)); /*clear nec status and data*/
     return RT_EOK;
 }
 /*read data from decoder*/

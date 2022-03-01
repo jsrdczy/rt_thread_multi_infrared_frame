@@ -43,6 +43,7 @@ RT-Thread online packages
 			   Version (latest)  --->
 ```
 其中 multi infrared receive channel nums 代表通道总个数，默认4个，用户自行修改
+
 decoder 解码器选择nec
 
 ```c
@@ -108,7 +109,7 @@ struct infrared_class *infrared_find(rt_uint8_t idx)
 
 3）main.c中
 参考使用实例，利用定义好的struct infrared_decoder_data infrared_data[MULTI_INFRARED_RECEIVE_CHANNEL_NUM]对每一个通道数据进行读取
-### 关于如何增加不同解析的协议
+### 关于如何增加不同协议的解析
 nec_decoder.c中nec_decoder_decode函数参数代表驱动输入检测到的下降沿电平时间间隔（100us个数），可以根据实际协议内容，修改该函数的解析逻辑，解析不同数据传入环形buffer中，由应用层读取。可参考nec解码自行实现别的协议解析
 
 ### 联系方式 & 感谢

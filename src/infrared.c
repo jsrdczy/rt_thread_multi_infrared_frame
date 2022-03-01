@@ -23,38 +23,38 @@ static struct infrared_class infrared[MULTI_INFRARED_RECEIVE_CHANNEL_NUM];
 /* if add channel add infrared pointer here!!! note channel num must be equal to MULTI_INFRARED_RECEIVE_CHANNEL_NUM*/
 struct infrared_class *infrared_find(rt_uint8_t idx)
 {
-	  struct infrared_class *res = RT_NULL;
+    struct infrared_class *res = RT_NULL;
     switch(idx)
-		{
-				case 0:
-						res = &infrared[0];
-				break;
+    {
+        case 0:
+        res = &infrared[0];
+        break;
 				
-				case 1:
-						res = &infrared[1];
-				break;
+        case 1:
+        res = &infrared[1];
+        break;
 				
-				case 2:
-						res = &infrared[2];
-				break;
+        case 2:
+        res = &infrared[2];
+        break;
 				
-				case 3:
-						res = &infrared[3];
-				break;
+        case 3:
+        res = &infrared[3];
+        break;
 				
-				default:
-				break;
-		}
+        default:
+        break;
+    }
 		
-		return res;
+    return res;
 }
 
 rt_err_t infrared_init(struct infrared_class *infrared)
 {
     RT_ASSERT(infrared != RT_NULL);
 		
-	  infrared->decode_time = 0;
-	  return RT_EOK;
+    infrared->decode_time = 0;
+    return RT_EOK;
 }
 
 rt_err_t decoder_write_data(struct infrared_class *infrared,struct ir_raw_data* data, rt_size_t size)
@@ -75,9 +75,9 @@ rt_err_t infrared_read(struct infrared_class *infrared,struct infrared_decoder_d
 rt_err_t infrared_write(struct infrared_class *infrared,struct infrared_decoder_data* data)
 {
     if(infrared->decoder.ops->write)
-		{
+    {
         return infrared->decoder.ops->write((struct decoder_class *)&infrared->decoder,data);
-		}
+    }
     return -RT_ERROR;
 }
 
